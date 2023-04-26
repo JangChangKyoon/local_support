@@ -1,18 +1,14 @@
-/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    "./pages/**/*.{js,jsx,ts,tsx}",
+    // css를 적용할 page 설정
+    // pages폴더/모든다이렉토리/모든파일/확장자
+
+    "./components/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
-    },
+    extend: {},
   },
   plugins: [],
-}
+};
+// 어느 컴포넌트(혹은 page)에 tailwind를 사용할 것인지 설정
