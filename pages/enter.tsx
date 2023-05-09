@@ -7,17 +7,10 @@ interface Method {
   method?: method;
 }
 
-interface MethodMore {
-  email?: string;
-  password?: string;
-}
-
 interface IForm {
   email?: string;
   phone?: number;
   password?: string;
-  password1?: string;
-  password2?: string;
 
   cityAccount?: {
     email?: string;
@@ -47,8 +40,6 @@ const Enter = () => {
   } = useForm({
     mode: "onChange",
   });
-
-  type methodForm = "cityAccount" | "cityLogin";
 
   const onValid = (data: IForm) => {
     if (data.cityAccount?.password2 !== data.cityAccount?.password1) {
