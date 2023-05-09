@@ -11,8 +11,6 @@ interface IForm {
   email?: string;
   phone?: number;
   password?: string;
-  password1?: string;
-  password2?: string;
 
   cityAccount?: {
     email?: string;
