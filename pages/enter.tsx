@@ -7,11 +7,6 @@ interface Method {
   method?: method;
 }
 
-interface MethodMore {
-  email?: string;
-  password?: string;
-}
-
 interface IForm {
   email?: string;
   phone?: number;
