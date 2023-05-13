@@ -1,5 +1,6 @@
-import Button from "@/component/button";
-import Input from "@/component/input";
+import Button from "@/components/button";
+import Input from "@/components/input";
+import { cls } from "@/libs/client/utils";
 import React, { useState } from "react";
 import { FieldErrors, useForm } from "react-hook-form";
 
@@ -24,10 +25,6 @@ interface IForm {
     password1?: string;
     password2?: string;
   };
-}
-
-function cls(...classnames: string[]) {
-  return classnames.join(" ");
 }
 
 const Enter = () => {
@@ -104,24 +101,47 @@ const Enter = () => {
 
   return (
     <div className="mt-16 px-4">
-      <h5 className="font-bold text-3xl text-center">
+      <h5 className="font-bold text-green-800 text-3xl text-center">
         Enter To Local Life Support Center
       </h5>
-      <div>
+      <div className="mt-12">
+        {/*  */}
         {/* 이메일 or 전화번호 로그인 탭 */}
-        {method.method === "city" || method.method === "village" ? null : (
-          <div>
-            <button value={"email"} onClick={onMethodClick}>
-              Email
-            </button>
-            <button value={"phone"} onClick={onMethodClick}>
-              Phone
-            </button>
-          </div>
-        )}
-
+        <div className="flex flex-col item-center">
+          {method.method === "city" || method.method === "village" ? null : (
+            <div className="grid grid-cols-2 border-b w-full">
+              <button
+                className={cls(
+                  " pb-4 font-medium text-sm border-b-2",
+                  method.method === "email"
+                    ? " border-green-500 text-green-400"
+                    : " border-transparent hover:text-gray-400 text-gray-500"
+                )}
+                value={"email"}
+                onClick={onMethodClick}
+              >
+                Email
+              </button>
+              <button
+                className={cls(
+                  " pb-4 font-medium text-sm border-b-2",
+                  method.method === "phone"
+                    ? " text-green-400 border-green-500"
+                    : " border-transparent text-gray-500 hover:text-gray-400"
+                )}
+                value={"phone"}
+                onClick={onMethodClick}
+              >
+                Phone
+              </button>
+            </div>
+          )}
+        </div>
         {/* Form 랜더링 */}
-        <form onSubmit={handleSubmit(onValid, onInvalid)}>
+        <form
+          className=" flex flex-col mt-8"
+          onSubmit={handleSubmit(onValid, onInvalid)}
+        >
           {/* 이메일 or 전화번호 인증방식 랜더링 */}
 
           <div>
@@ -180,12 +200,19 @@ const Enter = () => {
                   ? "읍면동 담당자"
                   : null}
               </label>
-              <div>
+              <div className="grid grid-cols-2 border-b w-full">
                 <Button
                   type={"button"}
                   onClick={onAccountClick}
                   value={"login"}
                   method={method.method}
+                  account={account}
+                  classname={cls(
+                    "pb-4 font-mudium text-sm border-b-2 hover:cursor-pointer",
+                    account === false
+                      ? " border-green-500 text-green-400"
+                      : "border-transparent hover:text-gray-400 text-gray-500 "
+                  )}
                 />
 
                 <Button
@@ -193,10 +220,17 @@ const Enter = () => {
                   onClick={onAccountClick}
                   value={"account"}
                   method={method.method}
+                  account={account}
+                  classname={cls(
+                    "pb-4 font-mudium text-sm border-b-2 hover:cursor-pointer",
+                    account === true
+                      ? " border-green-500 text-green-400"
+                      : "border-transparent hover:text-gray-400 text-gray-500 "
+                  )}
                 />
               </div>
 
-              <div>
+              <div className="mt-8">
                 {/* 시군담당자 로그인 회원가입 : 삼항연산자 중첩사용  */}
                 {method.method === "city" && account === false ? (
                   <div>
@@ -391,12 +425,18 @@ const Enter = () => {
             </div>
           ) : null}
 
-          <input type="submit" value="Submit" />
+          <input
+            className=" mt-9 border py-2 rounded-md focus:text-green-600 hover:bg-green-400 bg-green-500 text-white "
+            type="submit"
+            value="Submit"
+          />
         </form>
-
         {/* 담당자 로그인탭 */}
-        <div>
-          <select onChange={onMethodClick}>
+        <div className="mt-3">
+          <select
+            className=" text-sm focus:ring-green-500 focus:border-green-500 w-full border border-gray-300 shadow-sm"
+            onChange={onMethodClick}
+          >
             <option defaultChecked value={"email"}>
               민원인
             </option>
